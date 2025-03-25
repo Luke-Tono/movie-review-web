@@ -18,10 +18,10 @@ test:
   password: 686969
 
 production:
-  <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  primary:
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
   
-  # 添加这个配置用于Action Cable
   cable:
     <<: *default
     url: <%= ENV['DATABASE_URL'] %>
