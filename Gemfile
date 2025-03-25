@@ -69,7 +69,7 @@ gem 'rack-mini-profiler'
 # 在Gemfile底部添加
 group :production do
   # PostgreSQL数据库适配器
-  gem 'pg'
+  # gem 'pg'
 end
 
 ruby '3.3.7' # 确保这里是你使用的Ruby版本
