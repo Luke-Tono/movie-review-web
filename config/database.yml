@@ -20,3 +20,8 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
+  
+  # 添加这个配置用于Action Cable
+  cable:
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
