@@ -1,0 +1,72 @@
+<div class="row mb-4">
+  <div class="col-md-12">
+    <h1><%= @movie.title %> <small class="text-muted">(<%= @movie.release_year %>)</small></h1>
+    
+    <div class="mb-3">
+      <span class="badge bg-info fs-6">
+        <i class="fas fa-star"></i> <%= @movie.average_rating %>/10
+      </span>
+      <span class="badge bg-secondary fs-6"><%= @movie.duration %>分钟</span>
+      <span class="badge bg-secondary fs-6"><%= @movie.language %></span>
+    </div>
+    
+    <p><strong>导演：</strong> <%= @movie.director %></p>
+    <p><strong>主演：</strong> <%= @movie.cast %></p>
+    <p><strong>类型：</strong> <%= @movie.genres %></p>
+    
+    <h4>剧情简介</h4>
+    <p><%= @movie.synopsis %></p>
+    
+    <% if logged_in? %>
+      <div class="dropdown mb-3">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="watchlistDropdown" data-bs-toggle="dropdown">
+          添加到观影清单
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="watchlistDropdown">
+          <% current_user.watchlists.each do |watchlist| %>
+            <li>
+              <%= link_to watchlist.name, add_movie_watchlist_path(watchlist, movie_id: @movie.id), class: "dropdown-item", data: { turbo_method: :post } %>
+            </li>
+          <% end %>
+          <li><hr class="dropdown-divider"></li>
+          <li><%= link_to "创建新观影清单", new_watchlist_path, class: "dropdown-item" %></li>
+        </ul>
+      </div>
+    <% end %>
+    
+    <% if current_user&.admin? %>
+      <div class="mb-3">
+        <%= link_to "编辑电影", edit_movie_path(@movie), class: "btn btn-warning" %>
+        <%= button_to "删除电影", movie_path(@movie), method: :delete, data: { confirm: "确定要删除这部电影吗？" }, class: "btn btn-danger" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="row mt-5">
+  <div class="col-12">
+    <h3>用户评论 (<%= @movie.reviews.count %>)</h3>
+    
+    <% if logged_in? && !@movie.reviews.exists?(user: current_user) %>
+      <div class="card mb-4">
+        <div class="card-header">
+          <h4>发表评论</h4>
+        </div>
+        <div class="card-body">
+          <%= render 'reviews/form' %>
+        </div>
+      </div>
+    <% end %>
+    
+    <% if @reviews.any? %>
+      <div class="reviews">
+        <%= render @reviews %>
+      </div>
+    <% else %>
+      <div class="alert alert-info">
+        暂无评论，成为第一个评论者吧！
+      </div>
+    <% end %>
+  </div>
+</div>

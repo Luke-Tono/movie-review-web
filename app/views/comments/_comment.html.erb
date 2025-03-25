@@ -1,0 +1,24 @@
+<div class="comment mb-2">
+  <div class="d-flex">
+    <div class="flex-shrink-0">
+      <% if comment.user.avatar.present? %>
+        <%= image_tag comment.user.avatar, class: "rounded-circle", width: 40 %>
+      <% else %>
+        <div class="bg-secondary text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+          <%= comment.user.username[0].upcase %>
+        </div>
+      <% end %>
+    </div>
+    <div class="flex-grow-1 ms-3">
+      <div class="d-flex justify-content-between">
+        <h6 class="mb-0"><%= link_to comment.user.username, user_path(comment.user) %></h6>
+        <small class="text-muted"><%= time_ago_in_words(comment.created_at) %>前</small>
+      </div>
+      <p class="mb-1"><%= comment.content %></p>
+      
+      <% if logged_in? && (current_user == comment.user || current_user.admin?) %>
+        <%= button_to "删除", comment_path(comment), method: :delete, data: { confirm: "确定要删除这条回复吗？" }, class: "btn btn-sm btn-link text-danger p-0" %>
+      <% end %>
+    </div>
+  </div>
+</div>

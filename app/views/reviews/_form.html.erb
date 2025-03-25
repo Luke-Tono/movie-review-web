@@ -1,0 +1,22 @@
+<%= form_with(model: [@movie, @review], local: true) do |f| %>
+  <%= render 'shared/errors', obj: @review %>
+  
+  <div class="mb-3">
+    <%= f.label :rating, "评分 (1-10)", class: "form-label" %>
+    <div class="rating-input">
+      <% (1..10).each do |num| %>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :rating, num, class: "form-check-input", required: true %>
+          <%= f.label "rating_#{num}", num, class: "form-check-label" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :content, "评论内容", class: "form-label" %>
+    <%= f.text_area :content, rows: 5, class: "form-control", required: true %>
+  </div>
+  
+  <%= f.submit "提交评论", class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,50 @@
+<div class="row mb-4">
+  <div class="col-md-8">
+    <h1><%= @watchlist.name %></h1>
+    <p>
+      <% if @watchlist.is_public %>
+        <span class="badge bg-success">公开</span>
+      <% else %>
+        <span class="badge bg-secondary">私密</span>
+      <% end %>
+      <small class="text-muted">创建于 <%= @watchlist.created_at.strftime("%Y-%m-%d") %></small>
+    </p>
+    <p><%= @watchlist.description %></p>
+  </div>
+  <div class="col-md-4 text-end">
+    <%= link_to "编辑", edit_watchlist_path(@watchlist), class: "btn btn-outline-secondary" %>
+    <%= button_to "删除", watchlist_path(@watchlist), method: :delete, data: { confirm: "确定要删除这个观影清单吗？" }, class: "btn btn-outline-danger" %>
+  </div>
+</div>
+
+<% if @watchlist.movies.any? %>
+  <div class="row">
+    <% @watchlist.movies.each do |movie| %>
+      <div class="col-md-3 mb-4">
+        <div class="card h-100">
+          <% if movie.poster_image.present? %>
+            <%= image_tag movie.poster_image, class: "card-img-top", alt: movie.title %>
+          <% else %>
+            <div class="card-img-top bg-secondary text-white d-flex justify-content-center align-items-center" style="height: 200px;">
+              <span>无海报</span>
+            </div>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= movie.title %></h5>
+            <p class="card-text">
+              <small class="text-muted"><%= movie.release_year %>年</small>
+            </p>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <%= link_to "详情", movie_path(movie), class: "btn btn-sm btn-outline-primary" %>
+            <%= button_to "移除", remove_movie_watchlist_path(@watchlist, movie_id: movie.id), method: :delete, class: "btn btn-sm btn-outline-danger" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="alert alert-info">
+    这个观影清单还没有添加电影，浏览电影页面并添加一些吧！
+  </div>
+<% end %>

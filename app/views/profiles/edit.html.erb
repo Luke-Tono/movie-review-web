@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h2>编辑个人资料</h2>
+      </div>
+      <div class="card-body">
+        <%= form_with(model: @profile, local: true) do |f| %>
+          <%= render 'shared/errors', obj: @profile %>
+          
+          <div class="mb-3">
+            <%= f.label :bio, "个人简介", class: "form-label" %>
+            <%= f.text_area :bio, rows: 5, class: "form-control" %>
+          </div>
+          
+          <div class="mb-3">
+            <%= f.label :location, "所在地", class: "form-label" %>
+            <%= f.text_field :location, class: "form-control" %>
+          </div>
+          
+          <div class="mb-3">
+            <%= f.label :favorite_genre, "喜爱的电影类型", class: "form-label" %>
+            <%= f.text_field :favorite_genre, class: "form-control" %>
+          </div>
+          
+          <div class="text-center">
+            <%= f.submit "保存", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="card-footer text-center">
+        <%= link_to "返回个人资料", user_path(@profile.user), class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>

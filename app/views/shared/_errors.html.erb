@@ -1,0 +1,10 @@
+<% if obj.errors.any? %>
+  <div class="alert alert-danger">
+    <h5 class="alert-heading">发生了 <%= pluralize(obj.errors.count, "个") %>错误：</h5>
+    <ul>
+      <% obj.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

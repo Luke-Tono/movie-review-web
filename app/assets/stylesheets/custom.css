@@ -1,0 +1,219 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+.container {
+  flex: 1;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* 导航栏样式 */
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #343a40;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, .8);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #fff;
+}
+
+/* 卡片样式 */
+.card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.075);
+  margin-bottom: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 0.75rem 1.25rem;
+}
+
+.card-title {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 0.75rem 1.25rem;
+}
+
+/* 页脚样式 */
+.footer {
+  margin-top: auto;
+  padding: 10px 0;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* 电影卡片样式 */
+.movie-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.movie-card .card-img-top {
+  height: 300px;
+  object-fit: cover;
+}
+
+.movie-poster-placeholder {
+  height: 300px;
+  background-color: #6c757d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* 评分样式 */
+.rating-input {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.rating-star {
+  color: #ffc107;
+  font-size: 1.2rem;
+}
+
+.rating-badge {
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* 评论样式 */
+.review {
+  border-left: 3px solid #007bff;
+  padding-left: 15px;
+  margin-bottom: 20px;
+}
+
+.comment {
+  border-left: 2px solid #6c757d;
+  padding-left: 10px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 按钮样式 */
+.btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* 徽章样式 */
+.badge {
+  margin-left: 5px;
+  padding: 0.35em 0.65em;
+}
+
+/* 用户头像样式 */
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #6c757d;
+  color: white;
+  font-weight: bold;
+}
+
+.user-avatar-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 表单样式 */
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-check-label {
+  margin-left: 5px;
+}
+
+/* 提示框样式 */
+.alert {
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.alert-dismissible .btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.75rem 1.25rem;
+}
+
+/* 搜索栏样式 */
+.search-form {
+  margin-bottom: 20px;
+}
+
+/* 分页样式 */
+.pagination {
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination .page-link {
+  color: #007bff;
+}
+
+.pagination .active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .card-columns {
+    column-count: 1;
+  }
+}
