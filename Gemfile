@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+ruby '3.3.7' # 确保这里是你使用的Ruby版本
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.2"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
@@ -66,10 +67,3 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'rack-mini-profiler'
 
-# 在Gemfile底部添加
-group :production do
-  # PostgreSQL数据库适配器
-  # gem 'pg'
-end
-
-ruby '3.3.7' # 确保这里是你使用的Ruby版本
