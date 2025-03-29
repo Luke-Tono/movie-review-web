@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "注册成功，欢迎加入我们！"
+      redirect_to root_path, notice: "Registration successful, welcome!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: "用户信息已更新"
+      redirect_to @user, notice: "User information updated"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
   def require_same_user
     if current_user != @user && !current_user.admin?
-      flash[:alert] = "您只能编辑自己的账户"
+      flash[:alert] = "You can only edit your own account"
       redirect_to root_path
     end
   end

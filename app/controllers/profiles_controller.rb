@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
-      redirect_to user_path(@profile.user), notice: "个人资料已更新"
+      redirect_to user_path(@profile.user), notice: "Profile updated"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class ProfilesController < ApplicationController
 
   def require_same_user
     if current_user != @profile.user
-      flash[:alert] = "您只能编辑自己的个人资料"
+      flash[:alert] = "You can only edit your own profile"
       redirect_to root_path
     end
   end

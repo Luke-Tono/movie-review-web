@@ -9,16 +9,16 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to movie_path(@review.movie), notice: "回复已发布"
+      redirect_to movie_path(@review.movie), notice: "Comment posted successfully"
     else
-      redirect_to movie_path(@review.movie), alert: "回复不能为空"
+      redirect_to movie_path(@review.movie), alert: "Comment cannot be empty"
     end
   end
 
   def destroy
     movie = @comment.review.movie
     @comment.destroy
-    redirect_to movie_path(movie), notice: "回复已删除"
+    redirect_to movie_path(movie), notice: "Comment deleted"
   end
 
   private
@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
 
   def require_same_user
     if current_user != @comment.user && !current_user.admin?
-      flash[:alert] = "您只能删除自己的回复"
+      flash[:alert] = "You can only delete your own comments"
       redirect_to movie_path(@comment.review.movie)
     end
   end

@@ -1,20 +1,20 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <%= link_to "电影影评", root_path, class: "navbar-brand" %>
+    <%= link_to "Movie Reviews", root_path, class: "navbar-brand" %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <%= link_to "首页", root_path, class: "nav-link" %>
+          <%= link_to "Home", root_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "电影", movies_path, class: "nav-link" %>
+          <%= link_to "Movies", movies_path, class: "nav-link" %>
         </li>
         <% if logged_in? %>
           <li class="nav-item">
-            <%= link_to "我的观影清单", watchlists_path, class: "nav-link" %>
+            <%= link_to "My Watchlists", watchlists_path, class: "nav-link" %>
           </li>
         <% end %>
       </ul>
@@ -25,22 +25,22 @@
               <%= current_user.username %>
             </a>
             <div class="dropdown-menu dropdown-menu-end">
-              <%= link_to "个人资料", user_path(current_user), class: "dropdown-item" %>
-              <%= link_to "编辑资料", edit_user_path(current_user), class: "dropdown-item" %>
+              <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
+              <%= link_to "Edit Profile", edit_user_path(current_user), class: "dropdown-item" %>
               <% if current_user.admin? %>
                 <div class="dropdown-divider"></div>
-                <%= link_to "添加新电影", new_movie_path, class: "dropdown-item" %>
+                <%= link_to "Add New Movie", new_movie_path, class: "dropdown-item" %>
               <% end %>
               <div class="dropdown-divider"></div>
-              <%= button_to "退出登录", logout_path, method: :delete, class: "dropdown-item" %>
+              <%= button_to "Logout", logout_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "登录", login_path, class: "nav-link" %>
+            <%= link_to "Login", login_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "注册", signup_path, class: "nav-link" %>
+            <%= link_to "Sign Up", signup_path, class: "nav-link" %>
           </li>
         <% end %>
       </ul>

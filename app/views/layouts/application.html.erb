@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>电影影评网站</title>
+    <title>Movie Review Website</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!-- 添加preconnect以提前建立连接 -->
+    <!-- Add preconnect to establish connection in advance -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
-    <!-- 使用defer属性延迟非关键JavaScript的加载 -->
+    <!-- Use defer attribute to delay loading of non-critical JavaScript -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- 移除或延迟加载字体，除非绝对必要 -->
+    <!-- Remove or delay loading fonts unless absolutely necessary -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"> -->
     
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -29,7 +30,7 @@
     </div>
     <%= render 'layouts/footer' %>
     
-    <!-- 使用defer属性延迟JavaScript加载 -->
+    <!-- Use defer attribute to delay JavaScript loading -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>

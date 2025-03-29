@@ -2,7 +2,7 @@
   <div class="col-md-4 mb-4">
     <div class="card">
       <div class="card-header">
-        <h3 class="mb-0">个人资料</h3>
+        <h3 class="mb-0">Profile</h3>
       </div>
       <div class="card-body">
         <div class="text-center mb-3">
@@ -16,30 +16,30 @@
           <h4 class="mt-3"><%= @user.username %></h4>
           <p class="text-muted">
             <% if @user.admin? %>
-              <span class="badge bg-danger">管理员</span>
+              <span class="badge bg-danger">Admin</span>
             <% else %>
-              <span class="badge bg-primary">用户</span>
+              <span class="badge bg-primary">User</span>
             <% end %>
           </p>
         </div>
         
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <strong>位置：</strong> <%= @user.profile.location.present? ? @user.profile.location : "未设置" %>
+            <strong>Location:</strong> <%= @user.profile.location.present? ? @user.profile.location : "Not set" %>
           </li>
           <li class="list-group-item">
-            <strong>喜爱的电影类型：</strong> <%= @user.profile.favorite_genre.present? ? @user.profile.favorite_genre : "未设置" %>
+            <strong>Favorite Movie Genres:</strong> <%= @user.profile.favorite_genre.present? ? @user.profile.favorite_genre : "Not set" %>
           </li>
           <li class="list-group-item">
-            <strong>注册时间：</strong> <%= @user.created_at.strftime("%Y-%m-%d") %>
+            <strong>Joined:</strong> <%= @user.created_at.strftime("%Y-%m-%d") %>
           </li>
         </ul>
       </div>
       
       <% if current_user == @user %>
         <div class="card-footer text-center">
-          <%= link_to "编辑个人资料", edit_profile_path(@user.profile), class: "btn btn-outline-primary" %>
-          <%= link_to "账户设置", edit_user_path(@user), class: "btn btn-outline-secondary" %>
+          <%= link_to "Edit Profile", edit_profile_path(@user.profile), class: "btn btn-outline-primary" %>
+          <%= link_to "Account Settings", edit_user_path(@user), class: "btn btn-outline-secondary" %>
         </div>
       <% end %>
     </div>
@@ -47,7 +47,7 @@
     <% if @user.profile.bio.present? %>
       <div class="card mt-4">
         <div class="card-header">
-          <h4 class="mb-0">个人简介</h4>
+          <h4 class="mb-0">Bio</h4>
         </div>
         <div class="card-body">
           <p><%= @user.profile.bio %></p>
@@ -59,7 +59,7 @@
   <div class="col-md-8">
     <div class="card mb-4">
       <div class="card-header">
-        <h3 class="mb-0"><%= @user.username %> 的评论</h3>
+        <h3 class="mb-0"><%= @user.username %>'s Reviews</h3>
       </div>
       <div class="card-body">
         <% if @user.reviews.any? %>
@@ -71,20 +71,20 @@
                     <%= link_to review.movie.title, movie_path(review.movie) %>
                     <span class="badge bg-info"><%= review.rating %>/10</span>
                   </h5>
-                  <small class="text-muted"><%= time_ago_in_words(review.created_at) %>前</small>
+                  <small class="text-muted"><%= time_ago_in_words(review.created_at) %> ago</small>
                 </div>
               </div>
               <div class="card-body">
                 <p><%= truncate(review.content, length: 200) %></p>
                 <% if review.content.length > 200 %>
-                  <%= link_to "查看完整评论", movie_path(review.movie, anchor: "review-#{review.id}") %>
+                  <%= link_to "View Full Review", movie_path(review.movie, anchor: "review-#{review.id}") %>
                 <% end %>
               </div>
             </div>
           <% end %>
         <% else %>
           <div class="alert alert-info">
-            <%= @user == current_user ? "您" : @user.username %> 还没有发表任何评论。
+            <%= @user == current_user ? "You" : @user.username %> haven't posted any reviews yet.
           </div>
         <% end %>
       </div>
@@ -93,7 +93,7 @@
     <% if @user == current_user || (@user.watchlists.where(is_public: true).any?) %>
       <div class="card">
         <div class="card-header">
-          <h3 class="mb-0"><%= @user.username %> 的观影清单</h3>
+          <h3 class="mb-0"><%= @user.username %>'s Watchlists</h3>
         </div>
         <div class="card-body">
           <% visible_watchlists = @user == current_user ? @user.watchlists : @user.watchlists.where(is_public: true) %>
@@ -106,14 +106,14 @@
                       <h5 class="card-title">
                         <%= watchlist.name %>
                         <% if watchlist.is_public %>
-                          <span class="badge bg-success">公开</span>
+                          <span class="badge bg-success">Public</span>
                         <% else %>
-                          <span class="badge bg-secondary">私密</span>
+                          <span class="badge bg-secondary">Private</span>
                         <% end %>
                       </h5>
-                      <p class="card-text"><%= truncate(watchlist.description, length: 100) || "无描述" %></p>
-                      <p class="text-muted">包含 <%= watchlist.movies.count %> 部电影</p>
-                      <%= link_to "查看详情", watchlist_path(watchlist), class: "btn btn-sm btn-outline-primary" %>
+                      <p class="card-text"><%= truncate(watchlist.description, length: 100) || "No description" %></p>
+                      <p class="text-muted">Contains <%= watchlist.movies.count %> movies</p>
+                      <%= link_to "View Details", watchlist_path(watchlist), class: "btn btn-sm btn-outline-primary" %>
                     </div>
                   </div>
                 </div>
@@ -121,7 +121,7 @@
             </div>
           <% else %>
             <div class="alert alert-info">
-              <%= @user == current_user ? "您" : @user.username %> 没有任何<%= @user == current_user ? "" : "公开的" %>观影清单。
+              <%= @user == current_user ? "You" : @user.username %> <%= @user == current_user ? "don't" : "doesn't" %> have any<%= @user == current_user ? "" : " public" %> watchlists.
             </div>
           <% end %>
         </div>

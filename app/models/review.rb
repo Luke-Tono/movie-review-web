@@ -5,5 +5,5 @@ class Review < ApplicationRecord
   
   validates :content, presence: true
   validates :rating, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
-  validates :user_id, uniqueness: { scope: :movie_id, message: "已经评论过这部电影" }
+  validates :user_id, uniqueness: { scope: :movie_id, message: "has already reviewed this movie" }
 end

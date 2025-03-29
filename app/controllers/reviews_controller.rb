@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
     @review.user = current_user
 
     if @review.save
-      redirect_to movie_path(@movie), notice: "评论已发布"
+      redirect_to movie_path(@movie), notice: "Review posted"
     else
       @reviews = @movie.reviews.includes(:user).order(created_at: :desc)
       render 'movies/show', status: :unprocessable_entity
@@ -27,7 +27,7 @@ class ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
-      redirect_to movie_path(@review.movie), notice: "评论已更新"
+      redirect_to movie_path(@review.movie), notice: "Review updated"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class ReviewsController < ApplicationController
   def destroy
     movie = @review.movie
     @review.destroy
-    redirect_to movie_path(movie), notice: "评论已删除"
+    redirect_to movie_path(movie), notice: "Review deleted"
   end
 
   private
@@ -51,7 +51,7 @@ class ReviewsController < ApplicationController
 
   def require_same_user
     if current_user != @review.user && !current_user.admin?
-      flash[:alert] = "您只能编辑或删除自己的评论"
+      flash[:alert] = "You can only edit or delete your own reviews"
       redirect_to movie_path(@review.movie)
     end
   end

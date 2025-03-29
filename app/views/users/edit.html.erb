@@ -2,40 +2,40 @@
   <div class="col-md-6">
     <div class="card">
       <div class="card-header">
-        <h2 class="text-center">编辑账户信息</h2>
+        <h2 class="text-center">Edit Account Information</h2>
       </div>
       <div class="card-body">
         <%= render 'shared/errors', obj: @user %>
         
         <%= form_with(model: @user, local: true) do |f| %>
           <div class="mb-3">
-            <%= f.label :username, "用户名", class: "form-label" %>
+            <%= f.label :username, "Username", class: "form-label" %>
             <%= f.text_field :username, class: "form-control" %>
           </div>
           
           <div class="mb-3">
-            <%= f.label :email, "电子邮箱", class: "form-label" %>
+            <%= f.label :email, "Email", class: "form-label" %>
             <%= f.email_field :email, class: "form-control" %>
           </div>
           
           <div class="mb-3">
-            <%= f.label :password, "新密码", class: "form-label" %>
+            <%= f.label :password, "New Password", class: "form-label" %>
             <%= f.password_field :password, class: "form-control" %>
-            <div class="form-text">如不修改密码，请留空</div>
+            <div class="form-text">Leave blank if you do not want to change your password</div>
           </div>
           
           <div class="mb-3">
-            <%= f.label :avatar, "头像URL", class: "form-label" %>
+            <%= f.label :avatar, "Avatar URL", class: "form-label" %>
             <%= f.text_field :avatar, class: "form-control" %>
           </div>
           
           <div class="text-center">
-            <%= f.submit "更新", class: "btn btn-primary" %>
+            <%= f.submit "Update", class: "btn btn-primary" %>
           </div>
         <% end %>
       </div>
       <div class="card-footer text-center">
-        <%= link_to "返回个人资料", user_path(@user), class: "btn btn-outline-secondary" %>
+        <%= link_to "Back to Profile", user_path(@user), class: "btn btn-outline-secondary" %>
       </div>
     </div>
   </div>

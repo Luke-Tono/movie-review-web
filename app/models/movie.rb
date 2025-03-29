@@ -7,8 +7,6 @@ class Movie < ApplicationRecord
   validates :duration, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
   
   def average_rating
-    Rails.cache.fetch([self, "average_rating"], expires_in: 12.hours) do
-      reviews.average(:rating).to_f.round(1)
-    end
+    reviews.average(:rating).to_f.round(1)
   end
 end

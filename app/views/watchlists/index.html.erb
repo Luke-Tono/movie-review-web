@@ -1,9 +1,9 @@
 <div class="row mb-4">
   <div class="col-md-8">
-    <h1>我的观影清单</h1>
+    <h1>My Watchlists</h1>
   </div>
   <div class="col-md-4 text-end">
-    <%= link_to "创建新观影清单", new_watchlist_path, class: "btn btn-primary" %>
+    <%= link_to "Create New Watchlist", new_watchlist_path, class: "btn btn-primary" %>
   </div>
 </div>
 
@@ -16,22 +16,22 @@
             <h5 class="card-title mb-0"><%= watchlist.name %></h5>
           </div>
           <div class="card-body">
-            <p class="card-text"><%= truncate(watchlist.description, length: 100) || "无描述" %></p>
+            <p class="card-text"><%= truncate(watchlist.description, length: 100) || "No description" %></p>
             <p class="card-text">
               <small class="text-muted">
-                包含 <%= watchlist.movies.count %> 部电影
+                Contains <%= watchlist.movies.count %> movies
                 <% if watchlist.is_public %>
-                  <span class="badge bg-success">公开</span>
+                  <span class="badge bg-success">Public</span>
                 <% else %>
-                  <span class="badge bg-secondary">私密</span>
+                  <span class="badge bg-secondary">Private</span>
                 <% end %>
               </small>
             </p>
           </div>
           <div class="card-footer">
-            <%= link_to "查看详情", watchlist_path(watchlist), class: "btn btn-sm btn-outline-primary" %>
-            <%= link_to "编辑", edit_watchlist_path(watchlist), class: "btn btn-sm btn-outline-secondary" %>
-            <%= button_to "删除", watchlist_path(watchlist), method: :delete, data: { confirm: "确定要删除这个观影清单吗？" }, class: "btn btn-sm btn-outline-danger" %>
+            <%= link_to "View Details", watchlist_path(watchlist), class: "btn btn-sm btn-outline-primary" %>
+            <%= link_to "Edit", edit_watchlist_path(watchlist), class: "btn btn-sm btn-outline-secondary" %>
+            <%= button_to "Delete", watchlist_path(watchlist), method: :delete, data: { confirm: "Are you sure you want to delete this watchlist?" }, class: "btn btn-sm btn-outline-danger" %>
           </div>
         </div>
       </div>
@@ -39,6 +39,6 @@
   </div>
 <% else %>
   <div class="alert alert-info">
-    您还没有创建任何观影清单，点击上方按钮创建一个吧！
+    You haven't created any watchlists yet. Click the button above to create one!
   </div>
 <% end %>

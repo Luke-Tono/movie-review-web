@@ -18,7 +18,7 @@ class WatchlistsController < ApplicationController
   def create
     @watchlist = current_user.watchlists.build(watchlist_params)
     if @watchlist.save
-      redirect_to @watchlist, notice: "观影清单已创建"
+      redirect_to @watchlist, notice: "Watchlist created"
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class WatchlistsController < ApplicationController
 
   def update
     if @watchlist.update(watchlist_params)
-      redirect_to @watchlist, notice: "观影清单已更新"
+      redirect_to @watchlist, notice: "Watchlist updated"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -37,23 +37,23 @@ class WatchlistsController < ApplicationController
 
   def destroy
     @watchlist.destroy
-    redirect_to watchlists_path, notice: "观影清单已删除"
+    redirect_to watchlists_path, notice: "Watchlist deleted"
   end
 
   def add_movie
     movie = Movie.find(params[:movie_id])
     unless @watchlist.movies.include?(movie)
       @watchlist.movies << movie
-      redirect_to @watchlist, notice: "电影已添加到观影清单"
+      redirect_to @watchlist, notice: "Movie added to watchlist"
     else
-      redirect_to @watchlist, alert: "电影已在观影清单中"
+      redirect_to @watchlist, alert: "Movie is already in the watchlist"
     end
   end
 
   def remove_movie
     movie = Movie.find(params[:movie_id])
     @watchlist.movies.delete(movie)
-    redirect_to @watchlist, notice: "电影已从观影清单中移除"
+    redirect_to @watchlist, notice: "Movie removed from watchlist"
   end
 
   private
@@ -68,7 +68,7 @@ class WatchlistsController < ApplicationController
 
   def require_same_user
     if current_user != @watchlist.user
-      flash[:alert] = "您只能操作自己的观影清单"
+      flash[:alert] = "You can only manage your own watchlists"
       redirect_to watchlists_path
     end
   end

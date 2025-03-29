@@ -2,7 +2,7 @@
   <%= render 'shared/errors', obj: @review %>
   
   <div class="mb-3">
-    <%= f.label :rating, "评分 (1-10)", class: "form-label" %>
+    <%= f.label :rating, "Rating (1-10)", class: "form-label" %>
     <div class="rating-input">
       <% (1..10).each do |num| %>
         <div class="form-check form-check-inline">
@@ -14,9 +14,9 @@
   </div>
   
   <div class="mb-3">
-    <%= f.label :content, "评论内容", class: "form-label" %>
+    <%= f.label :content, "Review Content", class: "form-label" %>
     <%= f.text_area :content, rows: 5, class: "form-control", required: true %>
   </div>
   
-  <%= f.submit "提交评论", class: "btn btn-primary" %>
+  <%= f.submit "Submit Review", class: "btn btn-primary" %>
 <% end %>

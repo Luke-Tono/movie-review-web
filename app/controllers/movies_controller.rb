@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
 
   def index
-      @movies = Movie.all
+    @movies = Movie.all
     
     case params[:sort]
     when "rating"
@@ -16,15 +16,16 @@ class MoviesController < ApplicationController
       @movies = @movies.order(created_at: :desc)
     end
     
-    # 如果你使用了分页插件，取消下面的注释
+    # If you're using a pagination plugin, uncomment below
     # @movies = @movies.page(params[:page]).per(12)  # Kaminari
-    # 或
+    # or
     # @movies = @movies.paginate(page: params[:page], per_page: 12)  # will_paginate
   end
 
   def show
-    @movie = Movie.includes(reviews: [:user, comments: :user]).find(params[:id])
-    @reviews = @movie.reviews.order(created_at: :desc)
+    # @movie is already set via before_action :set_movie
+    @reviews = @movie.reviews.includes(:user, comments: :user).order(created_at: :desc)
+    @review = Review.new  # Add this line to initialize @review
   end
 
   def new
@@ -34,7 +35,7 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to @movie, notice: "电影已成功添加"
+      redirect_to @movie, notice: "Movie added successfully"
     else
       render :new, status: :unprocessable_entity
     end
@@ -45,7 +46,7 @@ class MoviesController < ApplicationController
 
   def update
     if @movie.update(movie_params)
-      redirect_to @movie, notice: "电影信息已更新"
+      redirect_to @movie, notice: "Movie information updated"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -53,22 +54,22 @@ class MoviesController < ApplicationController
 
   def destroy
     @movie.destroy
-    redirect_to movies_path, notice: "电影已删除"
+    redirect_to movies_path, notice: "Movie deleted"
   end
 
   private
 
   def set_movie
-    @movie = Movie.find(params[:id])
+    @movie = Movie.includes(reviews: [:user, comments: :user]).find(params[:id])
   end
 
   def movie_params
-    params.require(:movie).permit(:title, :release_year, :director, :cast, :synopsis, :duration, :language, :genres)
+    params.require(:movie).permit(:title, :release_year, :director, :cast, :synopsis, :duration, :language, :genres, :poster_image)
   end
 
   def require_admin
     unless logged_in? && current_user.admin?
-      flash[:alert] = "您没有权限访问此页面"
+      flash[:alert] = "You don't have permission to access this page"
       redirect_to root_path
     end
   end
