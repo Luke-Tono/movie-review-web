@@ -7,15 +7,16 @@ development:
   <<: *default
   database: movie_reviews_development
   host: localhost
-  username: postgres
-  password: 686969
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+
 
 test:
   <<: *default
   database: movie_reviews_test
   host: localhost
-  username: postgres
-  password: 686969
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
 
 production:
   primary:

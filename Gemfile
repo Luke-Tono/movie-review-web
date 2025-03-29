@@ -67,3 +67,5 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'rack-mini-profiler'
 
+gem 'dotenv-rails', groups: [:development, :test]
+
