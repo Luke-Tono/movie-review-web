@@ -24,6 +24,14 @@
     <div class="col-md-4 mb-4">
       <%= link_to movie_path(movie), class: "text-decoration-none" do %>
         <div class="card h-100 border-0 shadow-sm">
+          <!-- 添加海报图片 -->
+          <% if movie.poster_image.present? %>
+            <%= image_tag movie.poster_image, class: "card-img-top", alt: movie.title %>
+          <% else %>
+            <div class="card-img-top bg-secondary text-white d-flex justify-content-center align-items-center" style="height: 200px;">
+              <span>No Poster</span>
+            </div>
+          <% end %>
           <div class="card-body">
             <h5 class="card-title fw-bold text-dark">
               <%= movie.title %>
